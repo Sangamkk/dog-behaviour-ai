@@ -88,28 +88,26 @@ model.eval()
 
 def predict_audio(file_path):
 
-    audio, sr = librosa.load(
+    print("===================================")
+    print("Audio File :", file_path)
 
-        file_path,
+    audio, sr = librosa.load(file_path, sr=16000)
 
-        sr=16000
-
-    )
+    print("Audio Loaded")
+    print("Shape :", audio.shape)
+    print("Sample Rate :", sr)
 
     mel = librosa.feature.melspectrogram(
-
         y=audio,
-
         sr=sr,
-
         n_mels=128
-
     )
+
+    print("Mel Generated :", mel.shape)
 
     mel = librosa.power_to_db(mel)
 
     mel -= mel.min()
-
     mel /= (mel.max() + 1e-6)
 
     mel = (mel * 255).astype(np.uint8)
@@ -122,30 +120,19 @@ def predict_audio(file_path):
 
     image = image.to(DEVICE)
 
+    print("Running Model...")
+
     with torch.no_grad():
 
         output = model(image)
 
         probability = torch.softmax(output, dim=1)
 
-        confidence, predicted = torch.max(
+        confidence, predicted = torch.max(probability, 1)
 
-            probability,
-
-            1
-
-        )
+    print("Prediction Done")
 
     return {
-
         "behaviour": classes[predicted.item()],
-
-        "confidence": round(
-
-            confidence.item() * 100,
-
-            2
-
-        )
-
+        "confidence": round(confidence.item() * 100, 2)
     }

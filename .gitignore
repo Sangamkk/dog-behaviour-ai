@@ -1,0 +1,29 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Dataset
+dataset/
+
+# Uploads
+uploads/
+
+# Training outputs
+runs/
+
+# VS Code
+.vscode/
+
+# Environment
+.env
+
+# Node
+node_modules/
+
+# Build
+dist/
+
+# OS
+.DS_Store
+Thumbs.db

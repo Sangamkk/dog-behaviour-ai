@@ -61,11 +61,15 @@ function AudioAnalysis() {
         }
 
         catch (error) {
-
             console.log(error);
+            console.log(error.response);
+            console.log(error.response?.data);
 
-            alert("Prediction Failed");
-
+            alert(
+                error.response?.data?.detail ||
+                error.message ||
+                "Prediction Failed"
+            );
         }
 
         finally {

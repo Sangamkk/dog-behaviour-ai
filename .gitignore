@@ -1,29 +1,26 @@
 # Python
-venv/
-__pycache__/
+backend/venv/
+backend/__pycache__/
+**/__pycache__/
 *.pyc
 
 # Dataset
-dataset/
+backend/dataset/
 
 # Uploads
-uploads/
+backend/uploads/
 
 # Training outputs
-runs/
+backend/runs/
+
+# Node
+frontend/node_modules/
+
+# React build
+frontend/dist/
 
 # VS Code
 .vscode/
 
 # Environment
 .env
-
-# Node
-node_modules/
-
-# Build
-dist/
-
-# OS
-.DS_Store
-Thumbs.db
